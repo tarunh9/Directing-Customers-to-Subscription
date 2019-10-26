@@ -31,7 +31,7 @@ X_test2.index = X_test.index.values
 X_train = X_train2
 X_test = X_test2
 
-#### Model Building ####
+## Model Buildi
 
 
 # Fitting Model to the Training Set
@@ -67,9 +67,9 @@ pd.concat([pd.DataFrame(dataset.drop(columns = 'user').columns, columns = ["feat
            ],axis = 1)
 
 
-#### Model Tuning ####
+## Model Tuning 
 
-## Grid
+
 from sklearn.model_selection import GridSearchCV
 
 # Regularization Method
