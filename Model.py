@@ -9,7 +9,6 @@ dataset = pd.read_csv('new_appdata10.csv')
 response = dataset['enrolled']
 dataset = dataset.drop(columns = 'enrolled')
 
-# Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(dataset, response,
                                                     test_size = 0.2,
@@ -31,18 +30,14 @@ X_test2.index = X_test.index.values
 X_train = X_train2
 X_test = X_test2
 
-## Model Buildi
 
 
-# Fitting Model to the Training Set
 from sklearn.linear_model import LogisticRegression
 classifier = LogisticRegression(random_state = 0, penalty = 'l1')
 classifier.fit(X_train, y_train)
 
-# Predicting Test Set
 y_pred = classifier.predict(X_test)
 
-# Evaluating Results
 from sklearn.metrics import confusion_matrix, accuracy_score, f1_score, precision_score, recall_score
 cm = confusion_matrix(y_test, y_pred)
 accuracy_score(y_test, y_pred)
@@ -56,29 +51,21 @@ sn.set(font_scale=1.4)
 sn.heatmap(df_cm, annot=True, fmt='g')
 print("Test Data Accuracy: %0.4f" % accuracy_score(y_test, y_pred)
 
-# Applying k-Fold Cross Validation
 from sklearn.model_selection import cross_val_score
 accuracies = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
 print("SVM Accuracy: %0.3f (+/- %0.3f)" % (accuracies.mean(), accuracies.std() * 2))
 
-# Analyzing Coefficients
 pd.concat([pd.DataFrame(dataset.drop(columns = 'user').columns, columns = ["features"]),
            pd.DataFrame(np.transpose(classifier.coef_), columns = ["coef"])
            ],axis = 1)
 
 
-## Model Tuning 
-
-
 from sklearn.model_selection import GridSearchCV
 
-# Regularization Method
 penalty = ['l1', 'l2']
 
-# Create regularization hyperparameter space
 C = [0.001, 0.01, 0.1, 1, 10, 100, 1000]
 
-# Combine Parameters
 parameters = dict(C=C, penalty=penalty)
 
 grid_search = GridSearchCV(estimator = classifier,
@@ -95,15 +82,9 @@ rf_best_accuracy = grid_search.best_score_
 rf_best_parameters = grid_search.best_params_
 rf_best_accuracy, rf_best_parameters
 
-
-
-# Regularization Method
 penalty = ['l1', 'l2']
-
-# Create regularization hyperparameter space
 C = [0.1, 0.5, 0.9, 1, 2, 5]
 
-# Combine Parameters
 parameters = dict(C=C, penalty=penalty)
 
 grid_search = GridSearchCV(estimator = classifier,
