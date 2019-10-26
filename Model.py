@@ -69,10 +69,10 @@ pd.concat([pd.DataFrame(dataset.drop(columns = 'user').columns, columns = ["feat
 
 #### Model Tuning ####
 
-## Grid Search (Round 1)
+## Grid
 from sklearn.model_selection import GridSearchCV
 
-# Select Regularization Method
+# Regularization Method
 penalty = ['l1', 'l2']
 
 # Create regularization hyperparameter space
@@ -96,9 +96,8 @@ rf_best_parameters = grid_search.best_params_
 rf_best_accuracy, rf_best_parameters
 
 
-## Grid Search (Round 2)
 
-# Select Regularization Method
+# Regularization Method
 penalty = ['l1', 'l2']
 
 # Create regularization hyperparameter space
