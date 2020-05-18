@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Aug 25 18:50:19 2018
 
-@author: Rony Sulca
-"""
-#### Importing Libraries ####
 
 import pandas as pd
 from dateutil import parser
@@ -15,11 +9,10 @@ import seaborn as sn
 dataset = pd.read_csv('appdata10.csv')
 
 
-#### EDA ####
 
 
-dataset.head(10) # Viewing the Data
-dataset.describe() # Distribution of Numerical Variables
+dataset.head(10) 
+dataset.describe() 
 
 # First set of Feature cleaning
 dataset["hour"] = dataset.hour.str.slice(1, 3).astype(int)
@@ -73,7 +66,6 @@ sn.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
 
 
  
-#### Feature Engineering ####
 
 
 # Formatting Date Columns
